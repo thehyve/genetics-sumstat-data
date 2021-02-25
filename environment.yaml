@@ -7,3 +7,4 @@ dependencies:
   - ipython
   - pyspark
   - scipy
+  - java-jdk=8

@@ -29,7 +29,7 @@ def main():
     global spark
     spark = (
         pyspark.sql.SparkSession.builder
-            .config("parquet.summary.metadata.level", "true")
+            .master("local[*]")
             .getOrCreate()
         #    .master("local[*]")
 

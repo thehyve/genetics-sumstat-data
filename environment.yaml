@@ -10,3 +10,4 @@ dependencies:
   - pyspark
   - scipy
   - lftp
+  - java-jdk=8

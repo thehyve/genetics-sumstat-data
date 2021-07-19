@@ -31,8 +31,8 @@ def main():
     spark = (
         pyspark.sql.SparkSession.builder
             .config("parquet.summary.metadata.level", "ALL")
+            .master("local[*]")
             .getOrCreate()
-        #    .master("local[*]")
 
     )
     print('Spark version: ', spark.version)

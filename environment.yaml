@@ -2,12 +2,12 @@ channels:
   - bioconda
   - conda-forge
 dependencies:
-  - python=3
+  - python=3.9.6
   - pandas>=0.24
   - htslib
   - jq
   - ipython
-  - pyspark
+  - pyspark=3.1.2
   - scipy
   - lftp
   - java-jdk=8

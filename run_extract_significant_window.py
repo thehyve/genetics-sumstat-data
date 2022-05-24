@@ -7,14 +7,14 @@ def main():
     args.window = str(int(float(args.window)))
     input_dir = '/sumstat-data/input/'
     parquet_files = [file for file in os.listdir(input_dir)
-                        if os.path.join(input_dir, file).endswith('.parquet')]
+                        if file.startswith('study=')]
     for file in parquet_files:
         print(file)
         cmd = [
             'python',
             '/sumstat-data/filters/significant_window_extraction/filter_by_merge.py',
             '--in_sumstats', os.path.join(input_dir, file),
-            '--out_sumstats', os.path.join('/sumstat-data/output/', file),
+            '--out_sumstats', os.path.join('/sumstat-data/output/', f"{file.strip('study=')}.parquet"),
             '--window', args.window,
             '--pval', args.pval,
             '--data_type', 'gwas'

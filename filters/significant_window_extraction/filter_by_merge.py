@@ -54,7 +54,7 @@ def filter_significant_windows(in_pq, out_pq, data_type, window, pval):
     Args:
         in_pq (path): input parquet
         out_pq (path): output parquet
-        data type (str): gwas or moltrait
+        data type (str): gwas or mol_trait
         window (int): window to extract around significant variants
         pval (float): pvalue to be considered significant
     '''
@@ -68,7 +68,7 @@ def filter_significant_windows(in_pq, out_pq, data_type, window, pval):
     # Select rows that have "significant" p-values
     if data_type == 'gwas':
         sig = df.filter(F.col('pval') <= pval)
-    elif data_type == 'moltrait':
+    elif data_type == 'mol_trait':
         sig = df.filter(F.col('pval') <= (0.05 / F.col('num_tests')))
     sig = (
         sig
@@ -105,24 +105,7 @@ def filter_significant_windows(in_pq, out_pq, data_type, window, pval):
     )
 
     # Write output
-    if data_type == 'gwas':
-        (
-            merged
-            .write.parquet(
-                out_pq,
-                mode='overwrite'
-            )
-        )
-    elif data_type == 'moltrait':
-        (
-            merged
-            .write
-            .partitionBy('bio_feature', 'chrom')
-            .parquet(
-                out_pq,
-                mode='overwrite'
-            )
-        )
+    merged.write.parquet(out_pq, mode='overwrite')
 
     return 0
 
@@ -205,7 +188,7 @@ def parse_args():
                    metavar="<float>", type=float, required=True)
     p.add_argument('--data_type',
                    help=("Whether dataset is of GWAS or molecular trait type"),
-                   metavar="<str>", type=str, choices=['gwas', 'moltrait'], required=True)
+                   metavar="<str>", type=str, choices=['gwas', 'mol_trait'], required=True)
 
     args = p.parse_args()
 

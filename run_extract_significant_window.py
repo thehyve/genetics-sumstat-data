@@ -17,7 +17,7 @@ def main():
             '--out_sumstats', os.path.join('/sumstat-data/output/', f"{file.strip('study=')}.parquet"),
             '--window', args.window,
             '--pval', args.pval,
-            '--data_type', 'gwas'
+            '--data_type', args.data_type
         ]
         subprocess.call(cmd)
 
@@ -27,6 +27,8 @@ def parse_args():
                         help="Window size", type=str, required=True)
     parser.add_argument('--pval', metavar="<float>",
                         help="p-value", type=str, required=True)
+    parser.add_argument('--data_type', metavar="<str>",
+                        help="Data type (gwas or mol_trait)", type=str, required=True)
     args = parser.parse_args()
     return args
 

@@ -14,7 +14,7 @@ RUN apt-get update && \
 # install micromamba
 RUN mkdir -p /software/micromamba && \
     cd /software/micromamba && \
-    wget -qO- https://micromamba.snakepit.net/api/micromamba/linux-64/0.15.2 | tar -xvj bin/micromamba
+    curl -Ls https://micromamba.snakepit.net/api/micromamba/linux-64/0.15.2 | tar -xvj bin/micromamba
 ENV PATH="/software/micromamba/bin:${PATH}"
 
 # create conda/mamba environment

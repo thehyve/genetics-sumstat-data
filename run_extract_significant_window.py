@@ -14,7 +14,7 @@ def main():
             'python',
             '/sumstat-data/filters/significant_window_extraction/filter_by_merge.py',
             '--in_sumstats', os.path.join(input_dir, file),
-            '--out_sumstats', os.path.join('/sumstat-data/output/', f"{file.strip('study=')}.parquet"),
+            '--out_sumstats', os.path.join('/sumstat-data/output/', f"{file.removeprefix('study=')}.parquet"),
             '--window', args.window,
             '--pval', args.pval,
             '--data_type', args.data_type
